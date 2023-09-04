@@ -11,6 +11,24 @@ def get_db_connection(): #connect to our database
         password="dagsattPlugga345")
     return conn
 
+def read_phonelist():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM phonelist;")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
+
+def insert_contact():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM phonelist;")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
+
 simple = [
   ['alex', '013-131313'], ['benedict','01234'], ['christina','077-1212321']
 ]
@@ -37,11 +55,4 @@ def insert_page():
     else:
         return render_template('list.html', list=read_phonelist())
     
-def read_phonelist():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM phonelist;")
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-    return rows
+
