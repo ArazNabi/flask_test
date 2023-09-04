@@ -1,5 +1,15 @@
 from flask import Flask, render_template, request
 import datetime
+import psycopg2
+
+def get_db_connection(): #connect to our database
+    conn = psycopg2.connect(
+        host="localhost",
+        port="5433",
+        database= "phonedb",
+        user="postgres",
+        password="dagsattPlugga345")
+    return conn
 
 simple = [
   ['alex', '013-131313'], ['benedict','01234'], ['christina','077-1212321']
@@ -28,4 +38,10 @@ def insert_page():
         return render_template('list.html', list=read_phonelist())
     
 def read_phonelist():
-    return simple
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM phonelist;")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+    return rows
