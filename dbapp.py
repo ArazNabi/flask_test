@@ -17,3 +17,12 @@ def start():
         D[2] = '0'+D[2]
     return render_template('list.html', list=simple, date=D)
 
+@app.route("/insert", methods = ['POST', 'GET'])
+def insert_page():
+    if request.method == 'POST':
+        name= request.form['name']
+        phone= request.form['phone']
+        return render_template('insert.html', req=insert_contact(
+            name, phone, address, city, mail))
+    else:
+        return render_template('list.html', list=read_phonelist())
