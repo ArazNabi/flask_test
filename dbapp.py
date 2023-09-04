@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import datetime
 
 simple = [
-  ['arne', '013-131313'], ['berith','01234'], ['caesar','077-1212321']
+  ['alex', '013-131313'], ['benedict','01234'], ['christina','077-1212321']
 ]
 
 app = Flask(__name__)
@@ -26,3 +26,6 @@ def insert_page():
             name, phone, address, city, mail))
     else:
         return render_template('list.html', list=read_phonelist())
+    
+def read_phonelist():
+    return simple
