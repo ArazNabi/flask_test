@@ -20,15 +20,15 @@ def read_phonelist():
     conn.close()
     return rows
 
-def insert_contact(name, phone):
+def insert_contact(name, phone, address, city, mail):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO phonelist (name, phone) VALUES (?,?);",
-                name, phone)
-    rows = cur.fetchall()
+    cur.execute(
+        f"INSERT INTO phonelist VALUES (3, '{name}', '{phone}', '{address}', '{city}', '{mail}');")
+    cur.execute("COMMIT;")
     cur.close()
     conn.close()
-    return rows
+    return "Contact added"
 
 simple = [
   ['alex', '013-131313'], ['benedict','01234'], ['christina','077-1212321']
@@ -51,8 +51,10 @@ def insert_page():
     if request.method == 'POST':
         name= request.form['name']
         phone= request.form['phone']
-        return render_template('insert.html', req=insert_contact(
-            name, phone, address, city, mail))
+        address= request.form['address']
+        city= request.form['city']
+        mail= request.form['mail']
+        return render_template('insert.html', req=insert_contact(name, phone, address, city, mail))
     else:
         return render_template('list.html', list=read_phonelist())
     

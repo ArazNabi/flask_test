@@ -9,7 +9,9 @@
     <p> {{date[0]}}-{{date[1]}}-{{date[2]}}:</p>
     <ul>
        {% for item in list %}
-          <li>{{item[0]}}: {{item[1]}}: {{item[2]}}</li>
+          <li>{{item[0]}} : {{item[1]}} : {{item[2]}}: {{item[3]}} : {{item[4]}}
+            e-mail : {{item[5]}}
+          </li>
        {% endfor %}
     </ul>
 
@@ -23,6 +25,9 @@
    <label for="name">Insert:</label><br>
    <input type="text" id="name" name="name" value="Ture"><br>
    <input type="text" id="phone" name="phone" value="011-852741"><br>
+   <input type="text" id="address" name="address" value="Baker Street"><br>
+   <input type="text" id="city" name="city" value="london"><br>
+   <input type="text" id="mail" name="mail" value="test@something.com"><br>
    <input type="submit" value="Insert">
    </form>
     </form>
