@@ -20,10 +20,11 @@ def read_phonelist():
     conn.close()
     return rows
 
-def insert_contact():
+def insert_contact(name, phone):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM phonelist;")
+    cur.execute("INSERT INTO phonelist (name, phone) VALUES (?,?);",
+                name, phone)
     rows = cur.fetchall()
     cur.close()
     conn.close()
@@ -43,7 +44,7 @@ def start():
         D[1] = '0'+D[1]
     if len(D[2])<2:
         D[2] = '0'+D[2]
-    return render_template('list.html', list=simple, date=D)
+    return render_template('list.html', list=read_phonelist(), date=D)
 
 @app.route("/insert", methods = ['POST', 'GET'])
 def insert_page():
