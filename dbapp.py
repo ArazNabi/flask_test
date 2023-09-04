@@ -24,7 +24,8 @@ def insert_contact(name, phone, address, city, mail):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute(
-        f"INSERT INTO phonelist VALUES (3, '{name}', '{phone}', '{address}', '{city}', '{mail}');")
+        "INSERT INTO phonelist (name, phone, address, city, email) VALUES (%s, %s, %s, %s, %s);",
+        (name, phone, address, city, mail))
     cur.execute("COMMIT;")
     cur.close()
     conn.close()
@@ -34,15 +35,12 @@ def delete_contact(id):
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute(
-        f"DELETE FROM phonelist WHERE id == '{id}';")
+        "DELETE FROM phonelist WHERE id = %s;", (id))
     cur.execute("COMMIT;")
     cur.close()
     conn.close()
     return "Contact removed"
 
-# simple = [
-#   ['alex', '013-131313'], ['benedict','01234'], ['christina','077-1212321']
-# ]
 
 app = Flask(__name__)
 
@@ -71,7 +69,7 @@ def insert_page():
 @app.route("/delete", methods = ['POST', 'GET'])
 def delete_page():
     if request.method == 'POST':
-        id= request.form['id']
-        return render_template('delete.html', req=delete_contact(id))
+        c_id= request.form['id']
+        return render_template('delete.html', req=delete_contact(c_id))
     else:
         return render_template('list.html', list=read_phonelist())

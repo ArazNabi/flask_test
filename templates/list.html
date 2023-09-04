@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Hello Sweden!</title>
+    <title>A bad phone list!</title>
   </head>
   <body>
     <h1>Phone list</h1>
@@ -15,11 +15,11 @@
        {% endfor %}
     </ul>
 
-    <form action="/delete">
-       <label for="name">Delete:</label><br>
-       <input type="text" id="id" id="id" value="0">
-       <input type="submit" value="Delete">
-    </form>
+<form action="/delete" method="post">
+   <label for="name">Delete:</label><br>
+   <input type="text" id="id" id="id" value="0">
+   <input type="submit" value="Delete">
+</form>
     <!-- <form action="/insert"> -->
 <form action="/insert" method="post">
    <label for="name">Insert:</label><br>
@@ -29,8 +29,6 @@
    <input type="text" id="city" name="city" value="london"><br>
    <input type="text" id="mail" name="mail" value="test@something.com"><br>
    <input type="submit" value="Insert">
-   </form>
-    </form>
   </body>
 </html>
 
